@@ -14,14 +14,18 @@ function FileTree({ data }) {
   return (
     <div>
       <div onClick={toggleOpen} style={{ cursor: "pointer" }}>
-        {data.isDirectory ? (
+        {data.contents && data.contents.length > 0 ? (
           <span>{isOpen ? "[-] " : "[+] "}</span>
         ) : (
           <span>&nbsp;&nbsp;&nbsp;</span>
         )}
-        <span onClick={() => openUrl(data.url)} style={{ color: "blue", textDecoration: "underline" }}>
-          {data.name}
-        </span>
+        {data.is_directory ? (
+          <span>{data.name}</span>
+        ) : (
+          <span onClick={() => openUrl(data.url)} style={{ color: "blue", textDecoration: "underline" }}>
+            {data.name}
+          </span>
+        )}
       </div>
       {isOpen && data.contents && (
         <div style={{ marginLeft: "20px" }}>
@@ -39,7 +43,7 @@ function App() {
 
   useEffect(() => {
     // Fetch file tree data from your API (e.g., /getFiles)
-    fetch("http://localhost:4000/getFiles")
+    fetch("http://localhost:5000/getFiles")
       .then((response) => response.json())
       .then((data) => {
         setFileTree(data);
@@ -51,7 +55,7 @@ function App() {
 
   return (
     <div>
-      <h1>File and Directory Tree</h1>
+      <h1>VA Web platform - File and Directory Tree</h1>
       {fileTree.map((item, index) => (
         <FileTree key={index} data={item} />
       ))}

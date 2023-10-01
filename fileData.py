@@ -1,9 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 import os
 
 app = Flask(__name__)
 
-# Recursive function to list files and directories with URLs
+# Recursive function to list files and directories with contents
 def list_files_and_directories(folder_path, parent_url):
     file_details = []
     for entry in os.listdir(folder_path):
@@ -22,11 +22,10 @@ def list_files_and_directories(folder_path, parent_url):
 
 @app.route("/getFiles")
 def get_files():
-    folder_path = "C://kafka_project//hardik-bhai-resources"  # Change this to the folder you want to list
-    base_url = "" #request.url_root  # Get the base URL
+    folder_path = "C://kafka_project//flask-routings"  # Change this to the folder you want to list
 
     try:
-        file_details = list_files_and_directories(folder_path, base_url)
+        file_details = list_files_and_directories(folder_path, folder_path)
         return jsonify(file_details)
     except Exception as e:
         print(str(e))
