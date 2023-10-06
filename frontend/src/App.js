@@ -8,7 +8,7 @@ function FileTree({ data }) {
   };
 
   const openUrl = (url) => {
-    window.open(url, "_blank"); // Open URL in a new tab
+    window.open(url, "_blank"); // open URL in a new tab on click
   };
 
   return (
@@ -42,7 +42,6 @@ function App() {
   const [fileTree, setFileTree] = useState([]);
 
   useEffect(() => {
-    // Fetch file tree data from your API (e.g., /getFiles)
     fetch("http://localhost:5000/getFiles")
       .then((response) => response.json())
       .then((data) => {

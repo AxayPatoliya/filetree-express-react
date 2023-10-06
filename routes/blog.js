@@ -14,13 +14,22 @@ router.get('/blog_list', (req, res)=>{
     blogs.forEach(blog => {
         console.log(blog.title);
     });
-    res.sendFile(path.join(__dirname ,'../views/blogHome.html'))
+    // res.sendFile(path.join(__dirname ,'../views/blogHome.html'))
+    res.render('blogHome', {
+        blogs:blogs
+    })
 })
 
-router.get('/blog/:title', (req, res)=>{
-        const blog_found = blogs.find(blog => blog.title==req.params.title)
-        console.log(blog_found);
-    res.sendFile(path.join(__dirname ,'../views/blogHome.html'))
+router.get('/blog/:slug', (req, res)=>{
+    const blog_found = blogs.filter((e) => {
+        return e.slug == req.params.slug;
+    })
+    console.log(blog_found);
+    // res.send(blog_found)
+    // res.sendFile(path.join(__dirname ,'../views/blogPage.html'), {blog:blog_found})
+    res.render('blogPage', {
+        blog:blog_found
+    })
 })
 
 

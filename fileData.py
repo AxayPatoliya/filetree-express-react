@@ -22,7 +22,7 @@ def list_files_and_directories(folder_path, parent_url):
 
 @app.route("/getFiles")
 def get_files():
-    folder_path = "C://kafka_project//flask-routings"  # Change this to the folder you want to list
+    folder_path = "C://kafka_project//flask-routings//kafka_flask"  # Change this to the folder you want to list
 
     try:
         file_details = list_files_and_directories(folder_path, folder_path)

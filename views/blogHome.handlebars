@@ -1,0 +1,10 @@
+this is blogHome.handlebars
+
+{{#each blogs}}
+
+<b>
+<a href="/blog/{{this.slug}}"><li>title: {{this.title}}</li></a>
+</b>
+
+<br><br>
+{{/each}}
